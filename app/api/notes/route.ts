@@ -40,27 +40,37 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   try {
-    const session = await auth();
-    const userId = session?.user?.id;
-
     const url = new URL(req.url);
-    const userOnly = url.searchParams.get("userOnly") === "true";
+    const noteId = url.searchParams.get("id");
+    const userId = url.searchParams.get("userId");
 
-    let notes;
-
-    if (userOnly && userId) {
-      notes = await prisma.note.findMany({
-        where: { userId },
-        orderBy: { createdAt: "desc" },
+    if (noteId) {
+      const note = await prisma.note.findUnique({
+        where: { id: noteId },
       });
+
+      if (!note) {
+        return NextResponse.json({ error: "Note not found" }, { status: 404 });
+      }
+
+      return NextResponse.json(note);
     } else {
-      notes = await prisma.note.findMany({
-        where: { isPublic: true },
-        orderBy: { createdAt: "desc" },
-      });
-    }
+      let notes;
 
-    return NextResponse.json(notes);
+      if (userId) {
+        notes = await prisma.note.findMany({
+          where: { userId },
+          orderBy: { createdAt: "desc" },
+        });
+      } else {
+        notes = await prisma.note.findMany({
+          where: { isPublic: true },
+          orderBy: { createdAt: "desc" },
+        });
+      }
+
+      return NextResponse.json(notes);
+    }
   } catch (error) {
     console.error("Error fetching notes:", error);
     return NextResponse.json(
@@ -106,7 +116,6 @@ export async function PATCH(req: Request) {
   }
 }
 
-// Delete a note
 export async function DELETE(req: Request) {
   try {
     const session = await auth();
