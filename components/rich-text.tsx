@@ -78,7 +78,7 @@ const RichText: React.FC<RichTextProps> = ({
       },
       editable: () => !readOnly,
     },
-    content: content,
+    content: content ?? "",
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
     },

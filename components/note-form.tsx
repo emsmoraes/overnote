@@ -18,6 +18,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { createNote } from "@/services/notes";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   note: z.string().refine((value) => {
@@ -44,6 +45,7 @@ interface NoteFormProps {
 
 function NoteForm({ user }: NoteFormProps) {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,6 +67,7 @@ function NoteForm({ user }: NoteFormProps) {
         const savedNote = await createNote(payload);
         console.log("Nota salva com sucesso:", savedNote);
         toast("Nota salva com sucesso!");
+        router.push("/dashboard/my-notes")
       } catch {
         alert("Ocorreu um erro ao salvar a nota. Tente novamente.");
       }
