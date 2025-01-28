@@ -8,6 +8,7 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
+import { useEffect, useState } from "react";
 
 const breadcrumbMap: Record<string, string> = {
   "/dashboard": "Dashboard",
@@ -15,12 +16,21 @@ const breadcrumbMap: Record<string, string> = {
   "/dashboard/my-notes/new": "Nova Anotação",
   "/dashboard/my-notes/edit": "Editar Anotação",
   "/dashboard/public-notes": "Anotações Públicas",
-  "/dashboard/public-notes/edit": "Editar Anotação",
 };
 
 export default function CustomBreadcrumb() {
   const pathname = usePathname();
   const pathSegments = pathname.split("/").filter(Boolean);
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <Breadcrumb>
