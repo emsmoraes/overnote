@@ -1,11 +1,11 @@
 import { BsLayoutTextSidebarReverse, BsViewList } from "react-icons/bs";
-import { RiHome9Line } from "react-icons/ri";
+import { HiOutlineHome } from "react-icons/hi";
 
 export const links = [
   {
     title: "Dashboard",
     url: "/dashboard",
-    icon: RiHome9Line,
+    icon: HiOutlineHome,
   },
   {
     title: "Minhas Anotações",
