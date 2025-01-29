@@ -14,9 +14,11 @@ const breadcrumbMap: Record<string, string> = {
   "/dashboard": "Dashboard",
   "/dashboard/my-notes": "Minhas Anotações",
   "/dashboard/my-notes/new": "Nova Anotação",
-  "/dashboard/my-notes/edit": "Editar Anotação",
   "/dashboard/public-notes": "Anotações Públicas",
+  "/notes": "Anotações",
 };
+
+const isId = (segment: string) => segment.length > 10;
 
 export default function CustomBreadcrumb() {
   const pathname = usePathname();
@@ -37,7 +39,15 @@ export default function CustomBreadcrumb() {
       <BreadcrumbList>
         {pathSegments.map((segment, index) => {
           const fullPath = `/${pathSegments.slice(0, index + 1).join("/")}`;
-          const label = breadcrumbMap[fullPath] || segment;
+          let label = breadcrumbMap[fullPath] || segment;
+
+          if (index > 1 && pathSegments[index - 1] === "my-notes" && isId(segment)) {
+            label = "Editar Anotação";
+          }
+
+          if (index > 0 && pathSegments[index - 1] === "notes" && isId(segment)) {
+            label = "Ver Anotação";
+          }
 
           return (
             <BreadcrumbItem key={fullPath}>
