@@ -27,7 +27,7 @@ export const addNote = async (
   }
 };
 
-export const showNote = async (noteId: string) => {
+export const showNote = async (noteId: string, userId?: string) => {
   try {
     const note = await db.note.findUnique({
       where: { id: noteId },
@@ -35,6 +35,10 @@ export const showNote = async (noteId: string) => {
 
     if (!note) {
       throw new Error("Note not found");
+    }
+
+    if (!note.isPublic && note.userId !== userId) {
+      throw new Error("Acesso não autorizado");
     }
 
     return note;
