@@ -3,7 +3,7 @@ import { HiOutlineHome } from "react-icons/hi";
 
 export const links = [
   {
-    title: "Dashboard",
+    title: "Início",
     url: "/dashboard",
     icon: HiOutlineHome,
   },
