@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useTransition } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Prisma } from "@prisma/client";
@@ -10,6 +10,8 @@ import { VscLoading } from "react-icons/vsc";
 import { AiOutlineDelete } from "react-icons/ai";
 import { toast } from "sonner";
 import { deleteNote } from "@/services/notes";
+import { LuPencil } from "react-icons/lu";
+import Link from "next/link";
 
 interface FeedItemProps {
   note: Prisma.NoteGetPayload<{
@@ -17,11 +19,11 @@ interface FeedItemProps {
       user: true;
     };
   }>;
-  showDelete: boolean;
+  isAuthor: boolean;
   userId: string;
 }
 
-function FeedItem({ note, showDelete, userId }: FeedItemProps) {
+function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
   const formattedDate = moment(note.createdAt).format("DD/MM/YYYY HH:mm");
 
   const [isPending, startTransition] = useTransition();
@@ -48,20 +50,33 @@ function FeedItem({ note, showDelete, userId }: FeedItemProps) {
           <span className="block">{note.user.name}</span>
           <span className="block text-xs">{note.user.email}</span>
         </div>
-        {showDelete && (
-          <Button
-            variant="destructive"
-            size="icon"
-            className="opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 ease-in-out absolute top-3 right-3 items-center justify-center"
-            onClick={handleDelete}
-            disabled={isPending}
-          >
-            {isPending ? (
-              <VscLoading className="animate-spin" />
-            ) : (
-              <AiOutlineDelete />
-            )}
-          </Button>
+        {isAuthor && (
+          <div className="flex gap-2 items-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 ease-in-out absolute top-3 right-3">
+            <Button
+              asChild
+              variant="outline"
+              size="icon"
+              className="items-center justify-center"
+            >
+              <Link href={`/dashboard/my-notes/${note.id}`}>
+                <LuPencil />
+              </Link>
+            </Button>
+
+            <Button
+              variant="destructive"
+              size="icon"
+              className="items-center justify-center"
+              onClick={handleDelete}
+              disabled={isPending}
+            >
+              {isPending ? (
+                <VscLoading className="animate-spin" />
+              ) : (
+                <AiOutlineDelete />
+              )}
+            </Button>
+          </div>
         )}
       </CardHeader>
       <CardContent>

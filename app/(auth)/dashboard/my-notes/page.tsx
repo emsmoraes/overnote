@@ -20,7 +20,7 @@ async function page() {
           <FeedItem
             note={note}
             key={note.id}
-            showDelete={true}
+            isAuthor={true}
             userId={user.id}
           />
         ))}
