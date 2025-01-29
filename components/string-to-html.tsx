@@ -1,19 +1,32 @@
-"use client";
-import React, { useCallback } from "react";
-
-import DOMPurify from "dompurify";
+import React, { useRef, useEffect } from "react";
 
 interface IStringToHtml {
   value: string;
 }
 
-export const StringToHtml: React.FC<IStringToHtml> = ({ value, ...props }) => {
-  const sanitizedData = useCallback(
-    (value: string) => ({
-      __html: DOMPurify.sanitize(value, {}),
-    }),
-    []
-  );
+export const StringToHtml = ({ value }: IStringToHtml) => {
+  const ref = useRef<HTMLDivElement | null>(null);
 
-  return <div {...props} dangerouslySetInnerHTML={sanitizedData(value)} />;
+  useEffect(() => {
+    if (ref.current) {
+      let shadowRoot = ref.current.shadowRoot;
+      if (!shadowRoot) {
+        shadowRoot = ref.current.attachShadow({ mode: "open" });
+      }
+
+      shadowRoot.innerHTML = `
+        <style>
+          body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+          }
+        </style>
+        <div>${value}</div>
+      `;
+    }
+  }, [value]);
+
+  return <div ref={ref} />;
 };
