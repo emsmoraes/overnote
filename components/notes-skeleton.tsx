@@ -2,7 +2,7 @@ import React from "react";
 
 function NotesSkeleton({ count }: { count: number }) {
   return (
-    <div className="flex flex-1 flex-col gap-5 p-4 pt-0">
+    <div className="flex flex-col items-center p-4 pt-0">
       <div className="max-w-[1000px] space-y-4">
         {Array.from({ length: count }).map((_, index) => (
           <div
