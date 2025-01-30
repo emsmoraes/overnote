@@ -57,6 +57,8 @@ function UpdateNoteForm({ user, noteId }: UpdateNoteFormProps) {
   const [changed, setChanged] = useState(false);
   const [contentStatus, setContentStatus] = useState<SaveStatus | null>();
 
+  const hasAuthorization = contentStatus !== "Unauthorized";
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -127,6 +129,8 @@ function UpdateNoteForm({ user, noteId }: UpdateNoteFormProps) {
   }, []);
 
   useEffect(() => {
+    if (contentStatus === "Unauthorized" || !contentStatus) return;
+
     form.handleSubmit(handleSubmit)();
   }, [valueDebounce, isPublic]);
 
@@ -168,6 +172,7 @@ function UpdateNoteForm({ user, noteId }: UpdateNoteFormProps) {
               <FormLabel>Anotação:</FormLabel>
               <FormControl>
                 <RichText
+                  disabled={!hasAuthorization}
                   content={value}
                   onChange={(value) => {
                     setContentStatus("Saving");
@@ -189,6 +194,7 @@ function UpdateNoteForm({ user, noteId }: UpdateNoteFormProps) {
               <FormLabel>Visibilidade:</FormLabel>
               <FormControl>
                 <RadioGroup
+                  disabled={!hasAuthorization}
                   onValueChange={(value) => {
                     setContentStatus("Saving");
                     onChange(value);
