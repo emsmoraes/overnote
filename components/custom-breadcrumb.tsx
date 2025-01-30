@@ -15,7 +15,6 @@ const breadcrumbMap: Record<string, string> = {
   "/dashboard/my-notes": "Minhas Anotações",
   "/dashboard/my-notes/new": "Nova Anotação",
   "/dashboard/public-notes": "Anotações Públicas",
-  "/notes": "Anotações",
 };
 
 const isId = (segment: string) => segment.length > 10;
@@ -45,7 +44,7 @@ export default function CustomBreadcrumb() {
             label = "Editar Anotação";
           }
 
-          if (index > 0 && pathSegments[index - 1] === "notes" && isId(segment)) {
+          if (index > 0 && pathSegments[index - 1] === "public-notes" && isId(segment)) {
             label = "Ver Anotação";
           }
 
