@@ -38,7 +38,9 @@ export const showNote = async (noteId: string, userId?: string) => {
     });
 
     if (!note) {
-      throw new Error("Note not found");
+      if (!note) {
+        return null;
+      }
     }
 
     if (!note.isPublic && note.userId !== userId) {

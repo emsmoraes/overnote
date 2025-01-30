@@ -1,3 +1,4 @@
+import BackButton from "@/components/back-button";
 import EmptyResults from "@/components/empty-results";
 import NoteDetails from "@/components/note-details";
 import NoteDetailsSkeleton from "@/components/note-details-skeleton";
@@ -21,13 +22,16 @@ async function index({ params }: PublicNoteProps) {
     avatar: session?.user?.image ?? "",
   };
 
-  const fondedNote = await showNote(params.id, user.id);
+  const fondedNote = (await showNote(params.id, user.id)) ?? null;
 
   return (
     <Suspense fallback={<NoteDetailsSkeleton />}>
-      {!fondedNote && <EmptyResults />}
+      <div className="flex flex-1 flex-col gap-4 p-4 pt-0 mb-14">
+        <BackButton to="/dashboard/public-notes" />
+        {!fondedNote && <EmptyResults />}
 
-      <NoteDetails note={fondedNote} />
+        {fondedNote && <NoteDetails note={fondedNote} />}
+      </div>
     </Suspense>
   );
 }
