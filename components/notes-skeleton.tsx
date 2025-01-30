@@ -2,12 +2,12 @@ import React from "react";
 
 function NotesSkeleton({ count }: { count: number }) {
   return (
-    <div className="flex flex-col items-center p-4 pt-0">
-      <div className="max-w-[1000px] space-y-4">
+    <div className="flex justify-center p-4 pt-0 w-full flex-1">
+      <div className="max-w-[1000px] space-y-4 flex-1">
         {Array.from({ length: count }).map((_, index) => (
           <div
             key={index}
-            className="animate-pulse bg-gray-100/75 p-6 rounded-lg shadow-md"
+            className="animate-pulse bg-gray-100/75 p-6 rounded-lg shadow-md w-full"
           >
             <div className="flex flex-row items-center gap-2">
               <div className="w-12 h-12 bg-gray-300 rounded-full" />

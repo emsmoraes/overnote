@@ -1,3 +1,4 @@
+import BackButton from "@/components/back-button";
 import EmptyResults from "@/components/empty-results";
 import FeedItem from "@/components/feed-item";
 import NotesSkeleton from "@/components/notes-skeleton";
@@ -19,6 +20,7 @@ async function page() {
       {notes.length === 0 && <EmptyResults />}
 
       <div className="flex flex-col items-center p-4 pt-0">
+        <BackButton to="/dashboard" />
         <div className="max-w-[1000px] space-y-4">
           {notes.map((note) => (
             <FeedItem

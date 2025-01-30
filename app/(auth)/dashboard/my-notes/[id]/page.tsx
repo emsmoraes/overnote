@@ -1,3 +1,4 @@
+import BackButton from "@/components/back-button";
 import UpdateNoteForm from "@/components/update-note-form";
 import { auth } from "@/lib/auth";
 import React from "react";
@@ -20,7 +21,8 @@ async function page({ params }: MyNoteProps) {
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-      <UpdateNoteForm user={user} noteId={params.id}/>
+      <BackButton to="/dashboard/my-notes" />
+      <UpdateNoteForm user={user} noteId={params.id} />
     </div>
   );
 }
