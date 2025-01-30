@@ -32,6 +32,9 @@ export const showNote = async (noteId: string, userId?: string) => {
   try {
     const note = await db.note.findUnique({
       where: { id: noteId },
+      include: {
+        user: true,
+      },
     });
 
     if (!note) {

@@ -17,16 +17,18 @@ async function page() {
   return (
     <Suspense fallback={<NotesSkeleton count={10} />}>
       {notes.length === 0 && <EmptyResults />}
-      
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        {notes.map((note) => (
-          <FeedItem
-            note={note}
-            key={note.id}
-            isAuthor={true}
-            userId={user.id}
-          />
-        ))}
+
+      <div className="flex flex-col items-center p-4 pt-0">
+        <div className="max-w-[1000px] space-y-4">
+          {notes.map((note) => (
+            <FeedItem
+              note={note}
+              key={note.id}
+              isAuthor={true}
+              userId={user.id}
+            />
+          ))}
+        </div>
       </div>
     </Suspense>
   );

@@ -41,54 +41,50 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
 
   return (
     <Card className="group relative">
-      <Link href={`/dashboard/public-notes/${note.id}`}>
-        <CardHeader className="flex flex-row items-center gap-2">
-          <Avatar>
-            <AvatarImage src="user-imagage.here" />
-            <AvatarFallback>{note.user.name?.[0] ?? "EM"}</AvatarFallback>
-          </Avatar>
-          <div>
-            <span className="block">{note.user.name}</span>
-            <span className="block text-xs">{note.user.email}</span>
-          </div>
-          {isAuthor && (
-            <div className="flex gap-2 items-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 ease-in-out absolute top-3 right-3">
-              <Button
-                asChild
-                variant="outline"
-                size="icon"
-                className="items-center justify-center"
-              >
-                <Link href={`/dashboard/my-notes/${note.id}`}>
-                  <LuPencil />
-                </Link>
-              </Button>
+      <CardHeader className="flex flex-row items-center gap-2">
+        <Avatar>
+          <AvatarImage src="user-imagage.here" />
+          <AvatarFallback>{note.user.name?.[0] ?? "EM"}</AvatarFallback>
+        </Avatar>
+        <div>
+          <span className="block">{note.user.name}</span>
+          <span className="block text-xs">{note.user.email}</span>
+        </div>
+        {isAuthor && (
+          <div className="flex gap-2 items-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 ease-in-out absolute top-3 right-3">
+            <Button
+              asChild
+              variant="outline"
+              size="icon"
+              className="items-center justify-center"
+            >
+              <Link href={`/dashboard/my-notes/${note.id}`}>
+                <LuPencil />
+              </Link>
+            </Button>
 
-              <Button
-                variant="destructive"
-                size="icon"
-                className="items-center justify-center"
-                onClick={handleDelete}
-                disabled={isPending}
-              >
-                {isPending ? (
-                  <VscLoading className="animate-spin" />
-                ) : (
-                  <AiOutlineDelete />
-                )}
-              </Button>
-            </div>
-          )}
-        </CardHeader>
-        <CardContent>
-          <ReadRichText value={note.content} />
-        </CardContent>
-        <CardFooter>
-          <small className="text-zinc-700">
-            {friendlyDate(note.createdAt)}
-          </small>
-        </CardFooter>
-      </Link>
+            <Button
+              variant="destructive"
+              size="icon"
+              className="items-center justify-center"
+              onClick={handleDelete}
+              disabled={isPending}
+            >
+              {isPending ? (
+                <VscLoading className="animate-spin" />
+              ) : (
+                <AiOutlineDelete />
+              )}
+            </Button>
+          </div>
+        )}
+      </CardHeader>
+      <CardContent>
+        <ReadRichText value={note.content} />
+      </CardContent>
+      <CardFooter>
+        <small className="text-zinc-700">{friendlyDate(note.createdAt)}</small>
+      </CardFooter>
     </Card>
   );
 }

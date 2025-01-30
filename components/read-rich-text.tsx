@@ -22,10 +22,12 @@ export const ReadRichText = ({ value }: IReadRichText) => {
             padding: 0;
             width: 100%;
           }
-          div {
-            word-break: break-word;
-            overflow-wrap: break-word;
+          div * {
+             word-break: break-all;
             white-space: normal;
+          }
+          img {
+            max-width: 100%;
           }
         </style>
         <div>${value}</div>
