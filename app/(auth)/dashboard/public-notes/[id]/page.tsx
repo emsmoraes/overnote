@@ -2,7 +2,7 @@ import EmptyResults from "@/components/empty-results";
 import NoteDetails from "@/components/note-details";
 import NoteDetailsSkeleton from "@/components/note-details-skeleton";
 import { auth } from "@/lib/auth";
-import { showNote } from "@/services/notes";
+import { showNote } from "@/services/note";
 import React, { Suspense } from "react";
 
 interface PublicNoteProps {

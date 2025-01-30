@@ -18,7 +18,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { addNote } from "../services/notes";
+import { addNote } from "../services/note";
 
 const formSchema = z.object({
   note: z.string().refine((value) => {

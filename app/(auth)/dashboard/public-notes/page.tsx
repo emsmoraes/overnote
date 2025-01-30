@@ -2,7 +2,7 @@ import BackButton from "@/components/back-button";
 import EmptyResults from "@/components/empty-results";
 import FeedItem from "@/components/feed-item";
 import NotesSkeleton from "@/components/notes-skeleton";
-import { listNotes } from "@/services/notes";
+import { listNotes } from "@/services/note";
 import React, { Suspense } from "react";
 
 async function page() {

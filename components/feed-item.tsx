@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 import { VscLoading } from "react-icons/vsc";
 import { AiOutlineDelete } from "react-icons/ai";
 import { toast } from "sonner";
-import { deleteNote } from "@/services/notes";
+import { deleteNote } from "@/services/note";
 import { LuPencil } from "react-icons/lu";
 import Link from "next/link";
 import { ReadRichText } from "./read-rich-text";

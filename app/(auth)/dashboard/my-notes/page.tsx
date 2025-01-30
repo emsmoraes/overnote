@@ -3,7 +3,7 @@ import EmptyResults from "@/components/empty-results";
 import FeedItem from "@/components/feed-item";
 import NotesSkeleton from "@/components/notes-skeleton";
 import { auth } from "@/lib/auth";
-import { listNotes } from "@/services/notes";
+import { listNotes } from "@/services/note";
 import React, { Suspense } from "react";
 
 async function page() {

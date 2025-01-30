@@ -15,7 +15,7 @@ import {
 } from "./ui/form";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { toast } from "sonner";
-import { showNote, updateNote } from "../services/notes";
+import { showNote, updateNote } from "../services/note";
 import { debounce } from "@/utils/debounce";
 import { cleanHtmlText } from "@/utils/cleanHtmlText";
 import NoteSaveStatus from "./note-save-status";
