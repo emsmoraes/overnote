@@ -12,6 +12,7 @@ import { LuPencil } from "react-icons/lu";
 import Link from "next/link";
 import { ReadRichText } from "./read-rich-text";
 import { friendlyDate } from "@/utils/friendlyDate";
+import { FiLink } from "react-icons/fi";
 
 interface FeedItemProps {
   note: Prisma.NoteGetPayload<{
@@ -25,6 +26,13 @@ interface FeedItemProps {
 
 function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
   const [isPending, startTransition] = useTransition();
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(
+      `${window.location.origin}/dashboard/public-notes/${note.id}`
+    );
+    toast("Link copiado para a área de transferência");
+  };
 
   const handleDelete = () => {
     if (!userId) return;
@@ -50,8 +58,17 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
           <span className="block">{note.user.name}</span>
           <span className="block text-xs">{note.user.email}</span>
         </div>
-        {isAuthor && (
-          <div className="flex gap-2 items-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 ease-in-out absolute top-3 right-3">
+        <div className="flex gap-2 items-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 ease-in-out absolute top-3 right-3">
+          <Button
+            variant="outline"
+            size="icon"
+            className="items-center justify-center"
+            onClick={handleCopyLink}
+          >
+            <FiLink />
+          </Button>
+
+          {isAuthor && (
             <Button
               asChild
               variant="outline"
@@ -62,7 +79,9 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
                 <LuPencil />
               </Link>
             </Button>
+          )}
 
+          {isAuthor && (
             <Button
               variant="destructive"
               size="icon"
@@ -76,8 +95,8 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
                 <AiOutlineDelete />
               )}
             </Button>
-          </div>
-        )}
+          )}
+        </div>
       </CardHeader>
       <CardContent>
         <ReadRichText value={note.content} />
