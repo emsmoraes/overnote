@@ -228,6 +228,13 @@ const RichText: React.FC<RichTextProps> = ({
             .ProseMirror {
               color: #333333;
             }
+            .ProseMirror * {
+              word-break: break-all;
+              white-space: normal;
+            }
+            .ProseMirror img {
+              max-width: 100%;
+            }
             .ProseMirror a {
               color: #1d4ed8;
               text-decoration: underline;

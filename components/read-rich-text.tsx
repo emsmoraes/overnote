@@ -23,7 +23,7 @@ export const ReadRichText = ({ value }: IReadRichText) => {
             width: 100%;
           }
           div * {
-             word-break: break-all;
+            word-break: break-all;
             white-space: normal;
           }
           img {
