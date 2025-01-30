@@ -2,13 +2,13 @@ import UpdateNoteForm from "@/components/update-note-form";
 import { auth } from "@/lib/auth";
 import React from "react";
 
-interface NoteProps {
+interface MyNoteProps {
   params: {
     id: string;
   };
 }
 
-async function page({ params }: NoteProps) {
+async function page({ params }: MyNoteProps) {
   const session = await auth();
 
   const user = {
