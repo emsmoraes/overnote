@@ -108,6 +108,9 @@ function UpdateNoteForm({ user, noteId }: UpdateNoteFormProps) {
       startFindNoteTransition(async () => {
         try {
           const findedNote = await showNote(noteId, user.id);
+
+          if (!findedNote) return;
+
           setValueDebounce(findedNote.content);
           form.setValue("note", findedNote.content);
           form.setValue(
