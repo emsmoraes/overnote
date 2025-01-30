@@ -20,7 +20,7 @@ interface FeedItemProps {
     };
   }>;
   isAuthor: boolean;
-  userId: string;
+  userId?: string;
 }
 
 function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
@@ -29,6 +29,8 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = () => {
+    if(!userId) return;
+
     startTransition(async () => {
       try {
         await deleteNote(note.id, userId);
