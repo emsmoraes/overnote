@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export function FriendlyDate(date: string | Date) {
+export function friendlyDate(date: string | Date) {
   const parsedDate = moment(date);
   const now = moment();
   const diffDays = now.diff(parsedDate, "days");
