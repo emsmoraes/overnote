@@ -34,7 +34,7 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-interface NoteFormProps {
+interface CreateNoteFormProps {
   user: {
     id: string;
     name: string;
@@ -43,7 +43,7 @@ interface NoteFormProps {
   };
 }
 
-function NoteForm({ user }: NoteFormProps) {
+function CreateNoteForm({ user }: CreateNoteFormProps) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -138,4 +138,4 @@ function NoteForm({ user }: NoteFormProps) {
   );
 }
 
-export default NoteForm;
+export default CreateNoteForm;

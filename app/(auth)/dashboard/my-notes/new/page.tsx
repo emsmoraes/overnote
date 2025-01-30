@@ -1,5 +1,5 @@
 import BackButton from "@/components/back-button";
-import NoteForm from "@/components/note-form";
+import CreateNoteForm from "@/components/create-note-form";
 import { auth } from "@/lib/auth";
 import React from "react";
 
@@ -16,7 +16,7 @@ async function page() {
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <BackButton to="/dashboard/my-notes" />
-      <NoteForm user={user} />
+      <CreateNoteForm user={user} />
     </div>
   );
 }
