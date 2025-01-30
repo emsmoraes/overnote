@@ -2,7 +2,6 @@
 import React, { useTransition } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Prisma } from "@prisma/client";
-import { StringToHtml } from "./string-to-html";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import moment from "moment";
 import { Button } from "./ui/button";
@@ -12,6 +11,7 @@ import { toast } from "sonner";
 import { deleteNote } from "@/services/notes";
 import { LuPencil } from "react-icons/lu";
 import Link from "next/link";
+import { ReadRichText } from "./read-rich-text";
 
 interface FeedItemProps {
   note: Prisma.NoteGetPayload<{
@@ -82,7 +82,7 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
         )}
       </CardHeader>
       <CardContent>
-        <StringToHtml value={note.content} />
+        <ReadRichText value={note.content} />
       </CardContent>
       <CardFooter>
         <small className="text-zinc-700">Criado em: {formattedDate}</small>

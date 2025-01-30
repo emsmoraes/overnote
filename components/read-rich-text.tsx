@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from "react";
 
-interface IStringToHtml {
+interface IReadRichText {
   value: string;
 }
 
-export const StringToHtml = ({ value }: IStringToHtml) => {
+export const ReadRichText = ({ value }: IReadRichText) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
