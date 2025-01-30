@@ -15,7 +15,7 @@ async function page() {
 
         {notes.length === 0 && <EmptyResults />}
 
-        <div className="max-w-[1000px] space-y-4 mt-6">
+        <div className="max-w-[1000px] space-y-4 mt-6 w-full">
           {notes.map((note) => (
             <FeedItem note={note} key={note.id} isAuthor={false} />
           ))}
