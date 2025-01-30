@@ -3,7 +3,6 @@ import React, { useTransition } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Prisma } from "@prisma/client";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import moment from "moment";
 import { Button } from "./ui/button";
 import { VscLoading } from "react-icons/vsc";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -12,6 +11,7 @@ import { deleteNote } from "@/services/notes";
 import { LuPencil } from "react-icons/lu";
 import Link from "next/link";
 import { ReadRichText } from "./read-rich-text";
+import { FriendlyDate } from "@/utils/friendlyDate";
 
 interface FeedItemProps {
   note: Prisma.NoteGetPayload<{
@@ -24,12 +24,10 @@ interface FeedItemProps {
 }
 
 function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
-  const formattedDate = moment(note.createdAt).format("DD/MM/YYYY HH:mm");
-
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = () => {
-    if(!userId) return;
+    if (!userId) return;
 
     startTransition(async () => {
       try {
@@ -45,7 +43,7 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
     <Card className="group relative">
       <CardHeader className="flex flex-row items-center gap-2">
         <Avatar>
-          <AvatarImage src="https://i.pinimg.com/736x/60/4d/e5/604de5c77e0a2713956a8f02bdc30606.jpg" />
+          <AvatarImage src="user-imagage.here" />
           <AvatarFallback>{note.user.name?.[0] ?? "EM"}</AvatarFallback>
         </Avatar>
         <div>
@@ -85,7 +83,7 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
         <ReadRichText value={note.content} />
       </CardContent>
       <CardFooter>
-        <small className="text-zinc-700">Criado em: {formattedDate}</small>
+        <small className="text-zinc-700">{FriendlyDate(note.createdAt)}</small>
       </CardFooter>
     </Card>
   );
