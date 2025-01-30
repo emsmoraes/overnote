@@ -80,7 +80,7 @@ function NoteForm({ user }: NoteFormProps) {
           name="note"
           render={({ field }) => (
             <FormItem className="mb-4 w-full">
-              <FormLabel>Nota:</FormLabel>
+              <FormLabel>Anotação:</FormLabel>
               <FormControl>
                 <RichText content={field.value} onChange={field.onChange} />
               </FormControl>

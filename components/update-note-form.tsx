@@ -165,7 +165,7 @@ function UpdateNoteForm({ user, noteId }: UpdateNoteFormProps) {
           name="note"
           render={({ field: { value, onChange } }) => (
             <FormItem className="mb-4 w-full">
-              <FormLabel>Nota:</FormLabel>
+              <FormLabel>Anotação:</FormLabel>
               <FormControl>
                 <RichText
                   content={value}
