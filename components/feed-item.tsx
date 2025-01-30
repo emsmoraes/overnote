@@ -48,8 +48,8 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
   };
 
   return (
-    <Card className="group relative">
-      <CardHeader className="flex flex-row items-center gap-2">
+    <Card className="group relative w-full">
+      <CardHeader className="flex flex-row items-center gap-2 pt-16 sm:pt-6">
         <Avatar>
           <AvatarImage src="user-imagage.here" />
           <AvatarFallback>{note.user.name?.[0] ?? "EM"}</AvatarFallback>
@@ -58,7 +58,7 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
           <span className="block">{note.user.name}</span>
           <span className="block text-xs">{note.user.email}</span>
         </div>
-        <div className="flex gap-2 items-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 ease-in-out absolute top-3 right-3">
+        <div className="flex gap-2 items-center opacity-100 scale-100 transition-all duration-300 ease-in-out absolute top-3 right-3 sm:opacity-0 sm:group-hover:opacity-100 sm:scale-75 sm:group-hover:scale-100">
           <Button
             variant="outline"
             size="icon"

@@ -13,7 +13,7 @@ async function page() {
       {notes.length === 0 && <EmptyResults />}
       <div className="flex flex-col items-center p-4 pt-0">
         <BackButton to="/dashboard" />
-        <div className="max-w-[1000px] space-y-4">
+        <div className="max-w-[1000px] space-y-4 mt-6">
           {notes.map((note) => (
             <FeedItem note={note} key={note.id} isAuthor={false} />
           ))}
