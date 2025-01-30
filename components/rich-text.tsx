@@ -52,12 +52,14 @@ interface RichTextProps {
   content: string;
   onChange: (content: string) => void;
   readOnly?: boolean;
+  disabled?: boolean;
 }
 
 const RichText: React.FC<RichTextProps> = ({
   content,
   onChange,
   readOnly = false,
+  disabled = false,
 }) => {
   const editor = useEditor({
     extensions: [
@@ -76,17 +78,20 @@ const RichText: React.FC<RichTextProps> = ({
           readOnly ? "border-t" : ""
         } border-gray-700 text-gray-400 items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md`,
       },
-      editable: () => !readOnly,
+      editable: () => !readOnly && !disabled,
     },
     content: content ?? "",
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      if (!disabled) {
+        onChange(editor.getHTML());
+      }
     },
     immediatelyRender: false,
   });
 
   const activeClass = "bg-blue-500 text-white rounded-sm p-2";
   const inactiveClass = "p-2";
+  const disabledClass = "p-2 opacity-50 cursor-not-allowed";
 
   const actions = [
     {
@@ -197,8 +202,14 @@ const RichText: React.FC<RichTextProps> = ({
                 <TooltipTrigger asChild>
                   <button
                     type="button"
-                    onClick={action}
-                    className={active() ? activeClass : inactiveClass}
+                    onClick={!disabled ? action : undefined}
+                    className={
+                      disabled
+                        ? disabledClass
+                        : active()
+                        ? activeClass
+                        : inactiveClass
+                    }
                   >
                     <Icon />
                   </button>
