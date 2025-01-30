@@ -19,6 +19,7 @@ export const addNote = async (
     });
 
     revalidatePath("/dashboard/my-notes");
+    revalidatePath("/dashboard/public-notes");
   } catch (error) {
     console.error("Error adding note:", error);
     throw new Error(
@@ -58,17 +59,53 @@ export const listNotes = async (userId?: string) => {
           include: {
             user: true,
           },
+          orderBy: {
+            createdAt: "desc",
+          },
         })
       : await db.note.findMany({
           where: { isPublic: true },
           include: {
             user: true,
           },
+          orderBy: {
+            createdAt: "desc",
+          },
         });
 
     return notes;
   } catch (error) {
     console.error("Error fetching notes:", error);
+    throw new Error(
+      error instanceof Error ? error.message : "An unexpected error occurred."
+    );
+  }
+};
+
+export const updateNote = async (
+  data: {
+    content: string;
+    isPublic: boolean;
+  },
+  userId: string,
+  noteId: string
+) => {
+  try {
+    await db.note.update({
+      where: {
+        id: noteId,
+        userId: userId,
+      },
+      data: {
+        content: data.content,
+        isPublic: data.isPublic,
+      },
+    });
+
+    revalidatePath("/dashboard/my-notes");
+    revalidatePath("/dashboard/public-notes");
+  } catch (error) {
+    console.error("Error updating note:", error);
     throw new Error(
       error instanceof Error ? error.message : "An unexpected error occurred."
     );
@@ -92,7 +129,10 @@ export const deleteNote = async (noteId: string, userId: string) => {
     await db.note.delete({
       where: { id: noteId },
     });
+
     revalidatePath("/dashboard/my-notes");
+    revalidatePath("/dashboard/public-notes");
+
     return { message: "Note deleted successfully" };
   } catch (error) {
     console.error("Error deleting note:", error);
