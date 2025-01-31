@@ -90,6 +90,8 @@ Após rodar o comando, acesse: <http://localhost:3000/login>
 
 - Optei por usar **Promise.all** na página de Dashboard para otimizar o carregamento das informações. Como o Dashboard precisa buscar diversos dados de forma eficiente, utilizei **Promise.all** para executar todas essas requisições simultaneamente. Isso permite que as promessas sejam resolvidas em paralelo, melhorando a performance da página, pois não preciso esperar que cada requisição seja concluída antes de iniciar a próxima.
 
+- Adicionei validações do lado do servidor para impedir que usuários diferentes do criador editem anotações de outros usuários, ou veja anotações privadas de outros.
+
 ## 🤝 Criador
 
 Feito Por:

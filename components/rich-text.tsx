@@ -14,7 +14,6 @@ import {
   RiH1,
   RiH2,
   RiH3,
-  RiParagraph,
   RiListOrdered,
   RiListUnordered,
   RiLink,
@@ -146,12 +145,6 @@ const RichText: React.FC<RichTextProps> = ({
       tooltip: "Título nível 3 (Heading 3)",
       action: () => editor?.chain().focus().toggleHeading({ level: 3 }).run(),
       active: () => editor?.isActive("heading", { level: 3 }),
-    },
-    {
-      icon: RiParagraph,
-      tooltip: "Parágrafo (Paragraph)",
-      action: () => editor?.chain().focus().setParagraph().run(),
-      active: () => editor?.isActive("paragraph"),
     },
     {
       icon: RiLink,
