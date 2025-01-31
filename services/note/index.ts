@@ -20,6 +20,7 @@ export const addNote = async (
 
     revalidatePath("/dashboard/my-notes");
     revalidatePath("/dashboard/public-notes");
+    revalidatePath("/dashboard");
   } catch (error) {
     console.error("Error adding note:", error);
     throw new Error(
@@ -109,6 +110,7 @@ export const updateNote = async (
 
     revalidatePath("/dashboard/my-notes");
     revalidatePath("/dashboard/public-notes");
+    revalidatePath("/dashboard");
   } catch (error) {
     console.error("Error updating note:", error);
     throw new Error(

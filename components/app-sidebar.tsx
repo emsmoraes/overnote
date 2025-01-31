@@ -32,7 +32,7 @@ export async function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarGroup>
           <Button
-            className="group-data-[collapsible=icon]:min-h-10 h-auto font-semibold text-lg mb-5 [&_svg]:size-auto"
+            className="group-data-[collapsible=icon]:min-h-10 h-auto font-semibold text-lg mb-5 [&_svg]:size-auto mt-2"
             asChild
           >
             <Link href={"/dashboard/my-notes/new"}>
@@ -46,7 +46,7 @@ export async function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenu>
               {links.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild tooltip={item.title}>
+                  <SidebarMenuButton asChild tooltip={item.title} className="h-12">
                     <Link href={item.url}>
                       <item.icon />
                       <span className="text-base">{item.title}</span>

@@ -46,8 +46,7 @@ export const countUserNotesByDayOfMonth = async (userId: string) => {
     const startOfCurrentMonth = moment().startOf("month").toDate();
     const endOfCurrentMonth = moment().endOf("month").toDate();
 
-    const notes = await db.note.groupBy({
-      by: ["createdAt"],
+    const notes = await db.note.findMany({
       where: {
         userId,
         createdAt: {
@@ -55,8 +54,8 @@ export const countUserNotesByDayOfMonth = async (userId: string) => {
           lte: endOfCurrentMonth,
         },
       },
-      _count: {
-        id: true,
+      select: {
+        createdAt: true,
       },
     });
 
@@ -65,10 +64,9 @@ export const countUserNotesByDayOfMonth = async (userId: string) => {
 
     while (currentDate.isSameOrBefore(endOfCurrentMonth, "day")) {
       const dateKey = currentDate.format("YYYY-MM-DD");
-      const count =
-        notes.find(
-          (note) => moment(note.createdAt).format("YYYY-MM-DD") === dateKey
-        )?._count.id || 0;
+      const count = notes.filter(
+        (note) => moment(note.createdAt).format("YYYY-MM-DD") === dateKey
+      ).length;
 
       chartData.push({ day: dateKey, notes: count });
 
