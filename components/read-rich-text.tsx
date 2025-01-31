@@ -26,6 +26,11 @@ export const ReadRichText = ({ value }: IReadRichText) => {
             word-break: break-all;
             white-space: normal;
           }
+          p {
+            min-height: 1em;
+            margin-bottom: 0;
+            margin-top: 0;
+          }
           img {
             max-width: 100%;
           }

@@ -74,12 +74,15 @@ function CreateNoteForm({ user }: CreateNoteFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="flex-1 flex flex-col"
+      >
         <FormField
           control={form.control}
           name="note"
           render={({ field }) => (
-            <FormItem className="mb-4 w-full">
+            <FormItem className="mb-4 w-full flex flex-1 flex-col">
               <FormLabel>Anotação:</FormLabel>
               <FormControl>
                 <RichText content={field.value} onChange={field.onChange} />

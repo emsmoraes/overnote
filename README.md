@@ -105,7 +105,3 @@ Feito Por:
     </td>
   </tr>
 </table>
-
-## 📝 Licença
-
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.

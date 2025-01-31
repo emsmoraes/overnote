@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import React from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -69,14 +68,14 @@ const RichText: React.FC<RichTextProps> = ({
       LinkExtension,
       Underline,
       Placeholder.configure({
-        placeholder: "Escreva sua nota...",
+        placeholder: "Escreva sua anotação...",
       }),
     ],
     editorProps: {
       attributes: {
-        class: `flex flex-col px-4 py-3 justify-start border-b border-r border-l ${
+        class: `px-4 py-3 border-b border-r border-l outline-none ${
           readOnly ? "border-t" : ""
-        } border-gray-700 text-gray-400 items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md`,
+        } border-gray-700 text-gray-400 w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md`,
       },
       editable: () => !readOnly && !disabled,
     },
@@ -194,7 +193,7 @@ const RichText: React.FC<RichTextProps> = ({
 
   return (
     <TooltipProvider>
-      <div className="w-full">
+      <div className="w-full flex-1 flex flex-col">
         {!readOnly && (
           <div className="flex w-full flex-wrap items-start gap-2 rounded-tl-md rounded-tr-md border border-gray-700 px-4 py-3">
             {actions.map(({ icon: Icon, tooltip, action, active }, index) => (
@@ -222,11 +221,15 @@ const RichText: React.FC<RichTextProps> = ({
           </div>
         )}
 
-        <EditorContent editor={editor} />
+        <EditorContent
+          editor={editor}
+          className="flex-1 max-h-full basis-[0px] overflow-y-scroll scrollbar [&&::-webkit-scrollbar]:hidden sm:[&&::-webkit-scrollbar]:block"
+        />
         <style jsx global>
           {`
             .ProseMirror {
               color: #333333;
+              min-height: 100%;
             }
             .ProseMirror * {
               word-break: break-all;
