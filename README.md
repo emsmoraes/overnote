@@ -1,17 +1,115 @@
-# Como executar a aplicação
+# Overnote
 
-1. Clone o repositório
-2. Rode o comando `npm install` para instalar as dependências
-3. Copie o arquivo `.env.example` para `.env` e preencha com as informações do seu ambiente
-4. Rode o comando `docker-compose up -d` para subir o banco de dados em um container
-5. Rode o comando `npx prisma migrate dev` para executar as migrations do banco de dados
-6. Rode o comando `npm run dev` para executar a aplicação
+> Uma aplicação para gerenciar e descobrir anotações.
 
-# Desafio Técnico Dev Fullstack - Overlens
+## 💻 Pré-requisitos
 
-Disponível em: [desafio-tecnico.md](./desafio-tecnico.md)
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-Caso precisem de ajuda, ou tenham alguma sugestão, podem entrar em contato através:
+- Você instalou a versão 20.9.0 ou superior do `<NodeJS>`
+- Você instalou a versão 2.39 ou superior do `<Git>`
+- Você tem uma máquina `<Windows / Linux / Mac>`.
+- Você tem o `<Docker>` instalado na sua maquina.
 
-- Email: [pessoas@overlens.com.br](mailto:pessoas@overlens.com.br)
-- WhatsApp: [+5531996191047](https://wa.me/5531996191047)
+## 🚀 Instalando
+
+Para instalar o Overnote, faça isso:
+
+Linux, macOS e Windows:
+
+## 1. Clone o projeto do GitHub:
+
+```
+<git clone https://github.com/emsmoraes/overnote>
+```
+
+## 2. Entre na pasta do projeto:
+
+```
+<cd Overnote>
+```
+
+## 3. Instale as dependências usando o npm:
+
+```
+<npm i>
+```
+
+## 4. Crie o container no docker:
+
+```
+<docker compose up -d>
+```
+
+## 5. Conecte-se ao banco de dados criado:
+
+```
+Duplique o arquivo <.env.example> e renomeie para <.env>
+```
+
+## 🎲 Preparando o bando de dados
+
+Para preparar o banco com as migrações:
+
+```
+1. Rode uma migração para o banco de dados <npx prisma migrate dev --name "add_initial_tables">
+```
+
+```
+2. Garanta que a migração foi efetuada com sucesso consultando o banco de dados ultilizando o prisma <npx prisma studio>
+```
+
+## ☕ Usando
+
+```
+para rodar o projeto, use: <npm run dev>
+```
+
+## ⛓️ Projeto hospedado
+
+[Clique Aqui](https://Overnotev1.vercel.app/)
+
+## Tecnologias Utilizadas
+
+- **Next.js** (v14.2.16)
+- **Prisma** (v6.2.1)
+- **React** (v18)
+- **Tailwind CSS** (v3.4.1)
+- **TypeScript** (v5)
+
+# Anotações
+
+- Optei por usar **Server Actions** para realizar as alterações no banco de dados, ao invés da API do Next. Permitindo assim, que as operações de banco de dados sejam realizadas diretamente no servidor, sem a necessidade de criar rotas de API dedicadas. Isso simplifica a arquitetura da aplicação, reduzindo a quantidade de código e a complexidade geral.
+
+- Optei por usar **Zod** juntamente ao **React Hook Form** para fazer a validação na criação e edição de anotações. Isso permite uma validação de dados de forma mais estruturada e tipada, melhorando a confiabilidade do sistema e a experiência do desenvolvedor.
+
+- Optei por usar **Tailwind CSS** junto ao **Shadcn** por ser minha stack principal e por já estarem configurados no escopo inicial do projeto. Facilitando a integração e mantendo a consistência no design.
+
+- Para a edição da anotação ser salva automaticamente, implementei um **debounce** no conteúdo da anotação. A chamada para o backend é feita após um pequeno delay, o que ajuda a priorizar a performance e reduzir as chamadas desnecessárias ao banco de dados e api.
+
+- Tive algumas dificuldades na edição, mas não no salvamento automático. O principal desafio foi o gerenciamento dos status de salvamento, como "salvando", "salvo", "erro" e etc. Nada de outro mundo, mas foi um ponto que exigiu um pouco mais de atenção.  
+
+- Optei por estruturar as rotas utilizando pastas com o nome da entidade e um `index` dentro delas. Porém, em um projeto real que escalaria e utilizasse **Server Actions**, eu organizaria as pastas nomeadas pela entidade e criaria várias actions individuais dentro delas.
+
+-Optei por usar **Promise.all** na página de Dashboard para otimizar o carregamento das informações. Como o Dashboard precisa buscar diversos dados de forma eficiente, utilizei **Promise.all** para executar todas essas requisições simultaneamente. Isso permite que as promessas sejam resolvidas em paralelo, melhorando a performance da página, pois não preciso esperar que cada requisição seja concluída antes de iniciar a próxima.
+
+## 🤝 Criador
+
+Feito Por:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="#" title="defina o titulo do link">
+        <img src="https://avatars.githubusercontent.com/u/85969484?v=4&size=64" width="100px;" alt="Foto do Eduardo Meneses no GitHub"/><br>
+        <sub>
+          <b>Eduardo Meneses</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+## 📝 Licença
+
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
