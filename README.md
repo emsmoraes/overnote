@@ -64,7 +64,7 @@ Após rodar o comando, acesse: <http://localhost:3000/login>
 
 ## ⛓️ Projeto hospedado
 
-[Clique Aqui](https://Overnotev1.vercel.app/)
+[Clique Aqui](https://overnote-emsmoraes.vercel.app/login)
 
 ## Tecnologias Utilizadas
 
