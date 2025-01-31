@@ -35,28 +35,24 @@ Linux, macOS e Windows:
 <npm i>
 ```
 
-## 4. Crie o container no docker:
-
-```
-<docker compose up -d>
-```
-
-## 5. Conecte-se ao banco de dados criado:
+## 4. Configure as variáveis de ambiente:
 
 ```
 Duplique o arquivo <.env.example> e renomeie para <.env>
 ```
 
-## 🎲 Preparando o bando de dados
+## 5. Crie o container no docker:
+
+```
+<docker compose up -d>
+```
+
+## 5. Suba as migrações para o banco criado:
 
 Para preparar o banco com as migrações:
 
 ```
-1. Rode uma migração para o banco de dados <npx prisma migrate dev --name "add_initial_tables">
-```
-
-```
-2. Garanta que a migração foi efetuada com sucesso consultando o banco de dados ultilizando o prisma <npx prisma studio>
+Rode a migração usando <npx prisma migrate dev --name "add_initial_tables">
 ```
 
 ## ☕ Usando
