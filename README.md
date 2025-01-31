@@ -88,7 +88,7 @@ Após rodar o comando, acesse: <http://localhost:3000/login>
 
 - Optei por estruturar as rotas utilizando pastas com o nome da entidade e um `index` dentro delas. Porém, em um projeto real que escalaria e utilizasse **Server Actions**, eu organizaria as pastas nomeadas pela entidade e criaria várias actions individuais dentro delas.
 
--Optei por usar **Promise.all** na página de Dashboard para otimizar o carregamento das informações. Como o Dashboard precisa buscar diversos dados de forma eficiente, utilizei **Promise.all** para executar todas essas requisições simultaneamente. Isso permite que as promessas sejam resolvidas em paralelo, melhorando a performance da página, pois não preciso esperar que cada requisição seja concluída antes de iniciar a próxima.
+- Optei por usar **Promise.all** na página de Dashboard para otimizar o carregamento das informações. Como o Dashboard precisa buscar diversos dados de forma eficiente, utilizei **Promise.all** para executar todas essas requisições simultaneamente. Isso permite que as promessas sejam resolvidas em paralelo, melhorando a performance da página, pois não preciso esperar que cada requisição seja concluída antes de iniciar a próxima.
 
 ## 🤝 Criador
 
@@ -98,7 +98,7 @@ Feito Por:
   <tr>
     <td align="center">
       <a href="#" title="defina o titulo do link">
-        <img src="https://avatars.githubusercontent.com/u/85969484?v=4&size=64" width="100px;" alt="Foto do Eduardo Meneses no GitHub"/><br>
+        <img src="https://avatars.githubusercontent.com/u/85969484?s=400&u=b0e89e575a7cb91fc9f8a69e126a9d7587aa9478&v=4" width="100px;" alt="Foto do Eduardo Meneses no GitHub"/><br>
         <sub>
           <b>Eduardo Meneses</b>
         </sub>
