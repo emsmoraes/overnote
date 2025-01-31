@@ -59,6 +59,7 @@ Rode a migração usando <npx prisma migrate dev --name "add_initial_tables">
 
 ```
 para rodar o projeto, use: <npm run dev>
+e acesse <http://localhost:3000/login>
 ```
 
 ## ⛓️ Projeto hospedado
