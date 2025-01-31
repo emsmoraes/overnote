@@ -52,14 +52,14 @@ Duplique o arquivo <.env.example> e renomeie para <.env>
 Para preparar o banco com as migrações:
 
 ```
-Rode a migração usando <npx prisma migrate dev --name "add_initial_tables">
+Rode a migração usando <npx prisma migrate dev>
 ```
 
 ## ☕ Usando
 
 ```
 para rodar o projeto, use: <npm run dev>
-e acesse <http://localhost:3000/login>
+Após rodar o comando, acesse: <http://localhost:3000/login>
 ```
 
 ## ⛓️ Projeto hospedado
