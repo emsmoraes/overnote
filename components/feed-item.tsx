@@ -1,5 +1,5 @@
-"use client";
-import React, { useTransition } from "react";
+"use client"
+import React, { useState, useTransition } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Prisma } from "@prisma/client";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -26,6 +26,7 @@ interface FeedItemProps {
 
 function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
   const [isPending, startTransition] = useTransition();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(
@@ -98,9 +99,23 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
           )}
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent
+        className={`relative overflow-hidden transition-all ${
+          isExpanded ? "max-h-full" : "max-h-40"
+        }`}
+      >
         <ReadRichText value={note.content} />
+        {!isExpanded && (
+          <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+        )}
       </CardContent>
+      {note.content.length > 200 && (
+        <div className="text-center mt-2">
+          <Button variant="ghost" onClick={() => setIsExpanded(!isExpanded)}>
+            {isExpanded ? "Ver menos" : "Ver mais"}
+          </Button>
+        </div>
+      )}
       <CardFooter>
         <small className="text-zinc-700">{friendlyDate(note.createdAt)}</small>
       </CardFooter>
