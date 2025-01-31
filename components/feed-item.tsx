@@ -1,5 +1,5 @@
-"use client"
-import React, { useState, useTransition } from "react";
+"use client";
+import React, { useState, useTransition, useRef, useEffect } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Prisma } from "@prisma/client";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -13,6 +13,7 @@ import Link from "next/link";
 import { ReadRichText } from "./read-rich-text";
 import { friendlyDate } from "@/utils/friendlyDate";
 import { FiLink } from "react-icons/fi";
+import { Separator } from "./ui/separator";
 
 interface FeedItemProps {
   note: Prisma.NoteGetPayload<{
@@ -27,6 +28,16 @@ interface FeedItemProps {
 function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
   const [isPending, startTransition] = useTransition();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const MAX_HEIGHT = 160;
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setIsOverflowing(contentRef.current.scrollHeight > MAX_HEIGHT);
+    }
+  }, [note.content]);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(
@@ -52,7 +63,7 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
     <Card className="group relative w-full">
       <CardHeader className="flex flex-row items-center gap-2 pt-16 sm:pt-6">
         <Avatar>
-          <AvatarImage src="user-imagage.here" />
+          <AvatarImage src="user-image.here" />
           <AvatarFallback>{note.user.name?.[0] ?? "EM"}</AvatarFallback>
         </Avatar>
         <div>
@@ -99,23 +110,29 @@ function FeedItem({ note, isAuthor, userId }: FeedItemProps) {
           )}
         </div>
       </CardHeader>
+
+      <Separator className="mb-3" />
+
       <CardContent
-        className={`relative overflow-hidden transition-all ${
-          isExpanded ? "max-h-full" : "max-h-40"
-        }`}
+        ref={contentRef}
+        style={{ maxHeight: isExpanded ? "none" : `${MAX_HEIGHT}px` }}
+        className="relative overflow-hidden transition-all"
       >
         <ReadRichText value={note.content} />
-        {!isExpanded && (
+
+        {!isExpanded && isOverflowing && (
           <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-white to-transparent pointer-events-none" />
         )}
       </CardContent>
-      {note.content.length > 200 && (
+
+      {isOverflowing && (
         <div className="text-center mt-2">
-          <Button variant="ghost" onClick={() => setIsExpanded(!isExpanded)}>
+          <Button variant="outline" onClick={() => setIsExpanded(!isExpanded)}>
             {isExpanded ? "Ver menos" : "Ver mais"}
           </Button>
         </div>
       )}
+
       <CardFooter>
         <small className="text-zinc-700">{friendlyDate(note.createdAt)}</small>
       </CardFooter>
