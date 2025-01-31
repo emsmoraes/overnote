@@ -1,6 +1,6 @@
 # Overnote
 
-> Uma aplicação para gerenciar e descobrir anotações.
+> Uma aplicação para criar e descobrir anotações de outros usuários.
 
 ## 💻 Pré-requisitos
 
