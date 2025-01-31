@@ -47,7 +47,7 @@ Duplique o arquivo <.env.example> e renomeie para <.env>
 <docker compose up -d>
 ```
 
-## 5. Suba as migrações para o banco criado:
+## 6. Suba as migrações para o banco criado:
 
 Para preparar o banco com as migrações:
 
